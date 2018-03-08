@@ -36,10 +36,10 @@
     .text
     .code 32
 
-    .global _start
-    .func   _start
+    .global _customstart
+    .func   _customstart
 
-_start:
+_customstart:
 
     /* Vector table
     * NOTE: used only very briefly until RAM is remapped to address zero
@@ -159,7 +159,7 @@ _cstartup:
 
     SWI     0xFFFFFF        /* cause exception if main() ever returns */
 
-    .size   _start, . - _start
+    .size   _customstart, . - _customstart
     .endfunc
 
     .end

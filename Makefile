@@ -14,13 +14,13 @@
 ##############################################################################
 
 # GNU-ARM tools directory
-GNU_ARM = /opt/gcc-linaro-7.2.1-2017.11-x86_64_arm-eabi
+GNU_ARM = /opt/gcc-arm-none-eabi-4_7-2012q4
 
 # The gcc compiler and linker
-CC      = $(GNU_ARM)/bin/arm-eabi-gcc
-ASM     = $(GNU_ARM)/bin/arm-eabi-as
-LINK    = $(GNU_ARM)/bin/arm-eabi-gcc
-OBJCOPY = $(GNU_ARM)/bin/arm-eabi-objcopy
+CC      = $(GNU_ARM)/bin/arm-none-eabi-gcc
+ASM     = $(GNU_ARM)/bin/arm-none-eabi-as
+LINK    = $(GNU_ARM)/bin/arm-none-eabi-gcc
+OBJCOPY = $(GNU_ARM)/bin/arm-none-eabi-objcopy
 
 BLDDIR  = .
 
@@ -41,11 +41,11 @@ BINDIR   = dbg
 # gcc options for ARM and THUMB
 # -c    : compile only
 # -g    : source level debugging
-CCFLAGS = -gdwarf-2 -c -mcpu=$(ARM_CPU) -mthumb-interwork -O -mlong-calls -ffunction-sections -Wall -o$@
+CCFLAGS = -gdwarf-2 -c -mcpu=$(ARM_CPU) -mlittle-endian -mthumb-interwork -O -mlong-calls -ffunction-sections -Wall -o$@
 
-ASMFLAGS = -gdwarf2 -mcpu=$(ARM_CPU) -mthumb-interwork -o$@
+ASMFLAGS = -gdwarf2 -mcpu=$(ARM_CPU) -mlittle-endian -mthumb-interwork -o$@
 
-LINKFLAGS = -T ./$(APP_NAME).ld -o $(BINDIR)/$(APP_NAME).elf -Wl,-Map,$(BINDIR)/$(APP_NAME).map,--cref -lm
+LINKFLAGS = -T ./$(APP_NAME).ld -o $(BINDIR)/$(APP_NAME).elf -Wl,--start-group -lgcc -lc -lc -lm -lnosys -Wl,--end-group -Wl,-Map,$(BINDIR)/$(APP_NAME).map,--cref -lm
 
 
 # release ....................................................................

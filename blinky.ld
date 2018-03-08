@@ -15,7 +15,7 @@
 
 OUTPUT_FORMAT("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
 OUTPUT_ARCH(arm)
-ENTRY(_start)
+ENTRY(_customstart)
 
 MEMORY {                                       /* memory map of AT91SAM7S64 */
     ROM (rx)  : ORIGIN = 0x00100000, LENGTH = 64k
